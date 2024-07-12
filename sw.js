@@ -1,6 +1,7 @@
 module.exports = (req, res) => {
   res.setHeader('Content-Type', 'application/javascript');
   res.send(`
+    console.log('Service Worker Loaded');
     const CACHE_NAME = 'viqal-cache-v1';
     const urlsToCache = [
       '/',
@@ -10,18 +11,22 @@ module.exports = (req, res) => {
     ];
 
     self.addEventListener('install', event => {
+      console.log('Service Worker: Install Event');
       event.waitUntil(
         caches.open(CACHE_NAME)
           .then(cache => {
+            console.log('Service Worker: Caching URLs');
             return cache.addAll(urlsToCache);
           })
       );
     });
 
     self.addEventListener('fetch', event => {
+      console.log('Service Worker: Fetch Event');
       event.respondWith(
         caches.match(event.request)
           .then(response => {
+            console.log('Service Worker: Fetch Response');
             return response || fetch(event.request);
           })
       );
