@@ -1,14 +1,9 @@
 {
   "version": 2,
-  "functions": {
-    "api/sw.js": {
-      "runtime": "@vercel/node"
-    }
-  },
   "routes": [
     {
-      "src": "/api/sw.js",
-      "dest": "/api/sw.js"
+      "src": "/sw.js",
+      "dest": "/sw.js"
     }
   ]
 }
